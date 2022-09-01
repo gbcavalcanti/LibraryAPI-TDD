@@ -1,6 +1,9 @@
 package com.cursoTDD.libraryapi.api.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +31,7 @@ public class BookRepositoryTest {
 		//cenario
 		
 		String isbn = "123";
-		BookEntity bookEntity = BookEntity.builder().author("Artur").title("As aventuras").isbn(isbn).build();
+		BookEntity bookEntity = createNewBook(isbn);
 		entityManager.persist(bookEntity);
 		//execucao
 		
@@ -38,6 +41,12 @@ public class BookRepositoryTest {
 		
 		assertThat(exists).isTrue();
 	}
+	
+	
+	private BookEntity createNewBook(String isbn) {
+		return BookEntity.builder().author("Artur").title("As aventuras").isbn(isbn).build();
+	}
+	
 	@Test
 	@DisplayName("Deve retornar falso quando não existir um livro com o isbn informado")
 	public void returnFalseWhenIsbnDoesntExists() {
@@ -52,5 +61,19 @@ public class BookRepositoryTest {
 		//verificacao
 		
 		assertThat(exists).isFalse();
+	}
+	
+	@Test
+	@DisplayName("deve obter um livro por id")
+	public void findByIdTest() {
+		
+		BookEntity bookEntity =  createNewBook("123");
+		
+		entityManager.persist(bookEntity);
+		
+		
+		Optional<BookEntity>  foundBook =  bookRepository.findById(bookEntity.getId());
+		
+		assertThat(foundBook.isPresent()).isTrue();
 	}
 }
