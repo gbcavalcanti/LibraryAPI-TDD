@@ -184,13 +184,13 @@ public class BookServiceTest {
 	
 	@Test
 	@DisplayName("deve filtrar livros pelas propriedades")
-	public void findBookTest() {
+	public void findBookTest() throws Exception{
 		
 		BookEntity book = createValidBook();
 		
 		PageRequest pageRequest = PageRequest.of(0 , 10);
 		
-		List<BookEntity> lista = Arrays.asList(book);
+		List<BookEntity> lista = Arrays.asList(book); 
 		
 		Page<BookEntity> page = new PageImpl<BookEntity>(Arrays.asList(book), PageRequest.of(0, 10), 1);
 		

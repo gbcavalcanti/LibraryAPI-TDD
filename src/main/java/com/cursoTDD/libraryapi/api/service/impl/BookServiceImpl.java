@@ -82,6 +82,15 @@ public class BookServiceImpl implements BookService {
 
 
 
+	@Override
+	public Optional<BookEntity> getBookByIsbn(String isbn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
 	
 
 }

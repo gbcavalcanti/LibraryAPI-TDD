@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.cursoTDD.libraryapi.api.dto.BookDTO;
 import com.cursoTDD.libraryapi.api.entity.BookEntity;
+import com.cursoTDD.libraryapi.api.resource.BookController;
 import com.cursoTDD.libraryapi.api.service.BookService;
 import com.cursoTDD.libraryapi.exception.BusinessException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,7 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @ActiveProfiles("test")
-@WebMvcTest
+@WebMvcTest(controllers = {BookController.class})
 public class BookControllerTest {
 
 	static String BOOK_API = "/api/books";
